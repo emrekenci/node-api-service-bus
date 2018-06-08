@@ -1,0 +1,15 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Boyner Service API",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Emre Kenci",
+  "license": "MIT",
+  "dependencies": {
+    "azure": "^2.2.1-preview",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}

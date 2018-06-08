@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: service-api-app
+spec:
+  selector:
+    matchLabels:
+      app: service-api-app
+  replicas: 40
+  template:
+    metadata:
+      labels:
+        app: service-api-app
+    spec:
+      containers:
+      - name: serviceapicontainer
+        image: "<your-container-image>"
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: Always
+        env:
+          - name:  "AZURE_SERVICEBUS_CONNECTION_STRING"
+            value: "<your-azure-servicebus-conn-str"
+          - name: "AZURE_SERVICEBUS_QUEUE_NAME"
+            value: "<your-azure-servicebus-queue-name>"

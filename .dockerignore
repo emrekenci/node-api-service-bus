@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+PS-ENV-VARS
+.dockerignore
+.env
+.git
+.gitignore
+.vs
+.vscode
