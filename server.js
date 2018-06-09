@@ -41,10 +41,11 @@ app.put('/messages/normal', (req, res) => {
 
     serviceBusService.sendQueueMessage(queueName, message, function(error){
         if(!error){
-            res.send("ok")
+            return res.send("ok")
         }
         else {
-            console.log("Error writing message to queue: " + error)
+            console.error("Error writing message to queue: " + error)
+            return res.status(500).send('Something went wrong')
         }
     });
 });
