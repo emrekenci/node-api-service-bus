@@ -28,10 +28,10 @@ app.listen(port, () => {
 
     serviceBusService = azure.createServiceBusService();
 
-    console.log("All good. Listening on port: " + port);
+    console.log("All good... Listening on port: " + port);
 });
 
-app.put('/messages/normal', (req, res) => {
+var apiEndpoint = app.put('/messages/normal', (req, res) => {
 
     var message = {
         body: JSON.stringify(req.body),
