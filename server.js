@@ -4,6 +4,8 @@ const app            = express();
 const port           = 5000;
 const HOST           = '0.0.0.0';
 
+var serviceBusService;
+
 app.use(express.json()) 
 
 app.listen(port, () => {
@@ -24,14 +26,12 @@ app.listen(port, () => {
         process.exit(-1);
     }
 
-    console.log("Queue name: " + queueName);
+    serviceBusService = azure.createServiceBusService();
 
-    console.log("Listening on port: " + port);
+    console.log("All good. Listening on port: " + port);
 });
 
 app.put('/messages/normal', (req, res) => {
-
-    var serviceBusService = azure.createServiceBusService();
 
     var message = {
         body: JSON.stringify(req.body),
