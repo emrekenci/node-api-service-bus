@@ -31,6 +31,10 @@ app.listen(port, () => {
     console.log("All good... Listening on port: " + port);
 });
 
+var healthCheckEndpoint = app.get('', (req, res) => {
+    return res.send("ok")
+});
+
 var apiEndpoint = app.put('/messages/normal', (req, res) => {
 
     var message = {
