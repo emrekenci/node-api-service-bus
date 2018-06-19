@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "Boyner Service API",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Emre Kenci",
   "license": "MIT",
   "dependencies": {
-    "azure": "^2.2.1-preview",
+    "azure-sb": "^0.10.6",
     "body-parser": "^1.18.3",
     "express": "^4.16.3"
   }

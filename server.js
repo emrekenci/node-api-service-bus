@@ -1,41 +1,31 @@
 const express        = require('express');
-const azure          = require('azure');
+const azure          = require('azure-sb');
 const app            = express();
 const port           = 5000;
-const HOST           = '0.0.0.0';
 
-var serviceBusService;
+if (!process.env.AZURE_SERVICEBUS_CONNECTION_STRING) {
+    console.error("AZURE_SERVICEBUS_CONNECTION_STRING environment variable must be set")
+    process.exit(-1);
+}
+
+if (!process.env.AZURE_SERVICEBUS_QUEUE_NAME) {
+    console.error("AZURE_SERVICEBUS_QUEUE_NAME environment variable must be set")
+    process.exit(-1);
+}
+
+const serviceBusService = azure.createServiceBusService();
 
 app.use(express.json()) 
 
 app.listen(port, () => {
-    
-    var sbConnectionString = process.env.AZURE_SERVICEBUS_CONNECTION_STRING;
-
-    var queueName = process.env.AZURE_SERVICEBUS_QUEUE_NAME;
-
-    if (!sbConnectionString) {
-        console.error("AZURE_SERVICEBUS_CONNECTION_STRING environment variable must be set")
-        process.exit(-1);
-    }
-
-    console.log("Service bus instance: " + sbConnectionString);
-
-    if (!queueName) {
-        console.error("AZURE_SERVICEBUS_QUEUE_NAME environment variable must be set")
-        process.exit(-1);
-    }
-
-    serviceBusService = azure.createServiceBusService();
-
     console.log("All good... Listening on port: " + port);
 });
 
-var healthCheckEndpoint = app.get('', (req, res) => {
+app.get('', (req, res) => {
     return res.send("ok")
 });
 
-var apiEndpoint = app.put('/messages/normal', (req, res) => {
+app.put('/messages/normal', (req, res) => {
 
     var message = {
         body: JSON.stringify(req.body),
